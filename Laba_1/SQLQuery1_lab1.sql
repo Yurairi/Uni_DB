@@ -1,0 +1,30 @@
+USE master
+GO
+
+CREATE DATABASE MyDB
+ON
+	(NAME = MyDB_dat,
+	FILENAME = 'C:\DB\Laba_1\MyDB_dat.mdf',
+	SIZE = 4MB,
+	MAXSIZE = 10MB,
+	FILEGROWTH = 1MB
+	)
+LOG ON
+	(	
+	NAME = MyDB_log,
+	FILENAME = 'C:\DB\Laba_1\MyDB_log.mdf',
+	SIZE = 2MB,
+	MAXSIZE = 5MB,
+	FILEGROWTH = 1MB
+	)
+
+EXEC sp_helpdb MyDB
+
+USE [MyDB]
+GO
+ALTER DATABASE [MyDB] MODIFY FILE (NAME = N'MyDB_dat', MAXSIZE = 15MB)
+
+EXEC sp_helpdb MyDB
+
+USE master
+DROP DATABASE MyDB
